@@ -32,7 +32,7 @@ export class MockDbService {
     this.pUsers.push({name: 'Fil', secret: 'Fil'});
     this.pUsers.push({name: 'Pol', secret: 'Pol'});
     this.pUsers.push({name: 'Jul', secret: 'Jul'});
-    this.pUsers.push({name: 'Laure-Liese', secret: 'Laure'});
+    this.pUsers.push({name: 'Laure-Lies', secret: 'Laure'});
     this.pUsers.push({name: 'Katleen', secret: 'Katleen'});
     this.pUsers.push({name: 'Erik', secret: 'Erik'});
     this.pUsers.push({name: 'Bert', secret: 'Bert'});

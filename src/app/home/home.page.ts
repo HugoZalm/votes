@@ -72,8 +72,8 @@ export class HomePage implements OnInit {
     this.data.votes.get().subscribe((votes) => {
       this.votes = votes;
       this.checkValues();
-      // if (this.votes.length === this.users.length) {
-      if (this.votes.length === 3) {
+      if (this.votes.length === this.users.length) {
+      // if (this.votes.length === 3) {
         this.calculateResults();
         this.finished = true;
       }
