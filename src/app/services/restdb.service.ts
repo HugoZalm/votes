@@ -46,7 +46,7 @@ export class RestDbService {
     this.pUsers.push({name: 'Fil', secret: '69ci4'});
     this.pUsers.push({name: 'Pol', secret: 'c72sy'});
     this.pUsers.push({name: 'Jul', secret: '8fb39'});
-    this.pUsers.push({name: 'Laure-Liese', secret: 'lq35z'});
+    this.pUsers.push({name: 'Laure-Lies', secret: 'lq35z'});
     this.pUsers.push({name: 'Katleen', secret: 'q4e1w'});
     this.pUsers.push({name: 'Erik', secret: 'p8u29'});
     this.pUsers.push({name: 'Bert', secret: 'y21vp'});
