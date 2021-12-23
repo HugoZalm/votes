@@ -1,0 +1,34 @@
+ion-item-divider ion-label {
+  font-weight: bold;
+}
+
+.info {
+  text-align: center;
+  font-size: smaller;
+  font-weight: bold;
+  color: #777;
+}
+
+.error {
+  text-align: center;
+  font-weight: bold;
+  color: #ff0000;
+}
+
+div.plaats {
+  display: inline-block;
+  width: 20%;
+  line-height: 30px;
+  font-size: 20px;
+}
+div.naam {
+  display: inline-block;
+  width: 40%;
+  line-height: 30px;
+  font-size: 20px;
+}
+div.resultaten {
+  display: inline-block;
+  width: 40%;
+  font-size: 10px;
+}

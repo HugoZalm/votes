@@ -1,0 +1,166 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Aantal stemmen: {{votes.length}} / {{users.length}}
+    </ion-title>
+    <ion-buttons slot="end" (click)="refresh()">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">
+        Aantal stemmen: {{votes.length}} / {{users.length}}
+      </ion-title>
+      <ion-buttons slot="end" (click)="refresh()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="finished">
+    <ion-item-divider color="medium">
+      <ion-label>
+        De uitslag is bekend !
+      </ion-label>
+    </ion-item-divider>
+    <ion-item *ngFor="let result of results; let i = index">
+      <ion-label>
+        <div class="plaats">
+          <span>{{result.plaats}}</span>
+        </div>
+        <div class="naam">
+          <span>{{result.name}}</span>
+        </div>
+        <div class="resultaten">
+          <div>{{result.params.points}} punten</div>
+          <div>{{result.params.votes}} stemmen</div>
+          <div>({{result.params.votes1}} * 5) + ({{result.params.votes2}} * 3) + ({{result.params.votes3}} * 1)</div>
+        </div>
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <div>
+    <ion-list>
+      <form [formGroup]="form">
+  
+        <ion-item-divider color="medium">
+          <ion-label>
+            Je eigen gegevens
+          </ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>Naam</ion-label>
+          <ion-select formControlName="name" (ionChange)="onChange($event)">
+            <ion-select-option *ngFor="let user of users" value={{user.name}}>
+              <span>{{user.name}}</span>
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Secret</ion-label>
+          <ion-input type="text" class="ion-text-end" formControlName="secret" (ionChange)="onChange($event)"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="info">
+            Vul hierboven de code in die je hebt gekregen
+          </ion-label>
+        </ion-item>
+  
+        <div *ngIf="error.alreadyPosted">
+          <ion-item-divider color="medium">
+            <ion-label>
+              Voor wie stem je ?
+            </ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-label class="error">
+              <div>U heeft al een stem uitgebracht.</div>
+            </ion-label>
+          </ion-item>
+        </div>
+
+        <div *ngIf="!error.alreadyPosted">
+          <ion-item-divider color="medium">
+            <ion-label>
+              Voor wie stem je ?
+            </ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-label class="ion-text-center">
+              <ion-button disabled="{{!canVote()}}" (click)="save()">Verzend je stemmen</ion-button>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="error.noName">
+            <ion-label class="error">
+              Je naam ontbreekt !
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="error.noSecret">
+            <ion-label class="error">
+              Je Secret code ontbreekt !
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="error.wrongSecret">
+            <ion-label class="error">
+              Dit is niet je juiste Secret !
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="error.shortVotes">
+            <ion-label class="error">
+              Je hebt nog niet voldoende stemmen !
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="error.ownVote">
+            <ion-label class="error">
+              Je mag niet op jezelf stemmen !
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="error.multipleVotes">
+            <ion-label class="error">
+              Je mag niet 2 keer op dezelfde stemmen !
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="error.postError">
+            <ion-label class="error">
+              <div>Er is iets mis gegaan bij het opslaan.</div>
+              <div>Je stemmen zijn niet bewaard !</div>
+              <div>Probeer het nog een keer.</div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>5 punten</ion-label>
+            <ion-select formControlName="vote1" (ionChange)="onChange($event)">
+              <ion-select-option *ngFor="let user of users" value={{user.name}}>
+                <span>{{user.name}}</span>
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>3 punten</ion-label>
+            <ion-select formControlName="vote2" (ionChange)="onChange($event)">
+              <ion-select-option *ngFor="let user of users" value={{user.name}}>
+                <span>{{user.name}}</span>
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>1 punt</ion-label>
+            <ion-select formControlName="vote3" (ionChange)="onChange($event)">
+              <ion-select-option *ngFor="let user of users" value={{user.name}}>
+                <span>{{user.name}}</span>
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+      </form>
+    </ion-list>
+  </div>
+</ion-content>
